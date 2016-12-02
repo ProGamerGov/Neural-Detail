@@ -2,7 +2,7 @@
 
 Init_Image_Size=1000 #Starting output size
 Final_Image_Size=1200 #Final output size
-Num_Image_outputs= 2 #Number of outputs between initial and final output
+Num_Image_Outputs=2 #Number of outputs between initial and final output
 
  #Check for output directory, and create it if missing
 if [ ! -d "$output" ]; then
@@ -31,6 +31,16 @@ neural_style $input $style $out_file
 
 ###############################################
 
+Init_Image_Size=$current_image_size
+
+$Init_Image_Size $Final_Image_Size
+
+$Num_Image_Outputs
+
+$math=`echo $Final_Image_size $Init_Image_Size | awk '{print $1-$2}'`
+$math2=`echo $math $Num_Image_Outputs | awk '{print $1/$2}'`
+
+
 
 ###############################################
 
@@ -58,7 +68,7 @@ neural_style(){
     echo "Neural Style Transfering "$1
     if [ ! -s $3 ]; then
         th neural_style.lua -content_image $1 -style_image $2 -output_image $3 \
-            			-image_size 1000 -print_iter 100 -backend cudnn -gpu 0 -save_iter 0 \
+            			-image_size $current_image_size -print_iter 100 -backend cudnn -gpu 0 -save_iter 0 \
                 		-style_weight 20 -num_iterations 10 
                 #-original_colors 1
     fi
