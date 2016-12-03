@@ -1,8 +1,8 @@
 #!/bin/bash -x
 
-Init_Image_Size=1000 #Starting output size
-Final_Image_Size=1200 #Final output size
-Num_Image_Outputs=2 #Number of outputs between initial and final output
+init_image_size=1000 #Starting output size
+final_image_size=1200 #Final output size
+num_image_outputs=2 #Number of outputs between initial and final output
 
  #Check for output directory, and create it if missing
 if [ ! -d "$output" ]; then
@@ -25,7 +25,7 @@ main(){
     output="./output"
     
     #Define current output size value
-    current_image_size=$Init_Image_Size
+    current_image_size=$init_image_size
 
 
 ###############################################
@@ -34,20 +34,16 @@ neural_style $input $style $out_file
 
 ###############################################
 
-Init_Image_Size=$current_image_size
+init_image_size=$current_image_size
 
-$Init_Image_Size $Final_Image_Size
+$init_image_size $final_image_size
 
-$Num_Image_Outputs
+$num_image_outputs
 
-$math=`echo $Final_Image_size $Init_Image_Size | awk '{print $1-$2}'`
-$math2=`echo $math $Num_Image_Outputs | awk '{print $1/$2}'`
-
-
+$math=`echo $final_image_size $init_image_size | awk '{print $1-$2}'`
+$math2=`echo $math $num_image_outputs | awk '{print $1/$2}'`
 
 ###############################################
-
-
 
 for r in `seq 1 $num_frames`;
 do 
