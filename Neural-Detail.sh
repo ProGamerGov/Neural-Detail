@@ -49,6 +49,8 @@ $math2=`echo $math $num_image_outputs | awk '{print $1/$2}'`
 for r in `seq 1 $$num_image_outputs`;
 do 
 
+input=output/$out_file
+
 $current_image_size=`echo $math2 $current_image_size | awk '{print $1+$2}'`
 
 
