@@ -23,7 +23,7 @@ main(){
     
     #Defines the output directory
     output="./output"
-    out_file=$output/$input_file
+    out_file=$output
     
     #Define current output size value
     current_image_size=$init_image_size
@@ -37,16 +37,16 @@ neural_style $input $style $out_file
 
 init_image_size=$current_image_size
 
-$init_image_size $final_image_size
+#$init_image_size $final_image_size
 
-$num_image_outputs
+#$num_image_outputs
 
 $math=`echo $final_image_size $init_image_size | awk '{print $1-$2}'`
 $math2=`echo $math $num_image_outputs | awk '{print $1/$2}'`
 
 ###############################################
 
-for r in `seq 1 $num_frames`;
+for r in `seq 1 $$num_image_outputs`;
 do 
 
 $current_image_size=`echo $math2 $current_image_size | awk '{print $1+$2}'`
