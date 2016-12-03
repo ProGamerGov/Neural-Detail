@@ -23,6 +23,9 @@ main(){
     
     #Defines the output directory
     output="./output"
+    
+    #Define current output size value
+    current_image_size=$Init_Image_Size
 
 
 ###############################################
