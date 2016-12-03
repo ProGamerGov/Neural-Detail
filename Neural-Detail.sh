@@ -49,7 +49,7 @@ $math2=`echo $math $Num_Image_Outputs | awk '{print $1/$2}'`
 for r in `seq 1 $num_frames`;
 do 
 
-input=$outfile
+$current_image_size=`echo $math2 $current_image_size | awk '{print $1+$2}'`
 
 
 neural_style $input $style $out_file
